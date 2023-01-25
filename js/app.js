@@ -75,10 +75,27 @@ const increaseAge = () => {
     }
     updateStatCounter()
 }
+const setGameIntervals = () => {
+    hungerInterval = setInterval(increaseHunger, 5000)
+    exahstionInterval = setInterval(increaseExahstion, 5000)
+    boredomInterval = setInterval(increaseBoredom, 5000)
+    ageInterval = setInterval(increaseAge, 1000)
+    statChecker = setInterval(checkIfLose, 100, myTamagotchi)
+}
 
 const endGame = () => {
     document.getElementById('test-container').style.display = 'none'
     document.getElementById('end-container').style.display = 'flex'
+}
+const startGame = () => {
+    const monsterName = document.getElementById('monsterName').value
+    const images = ['../assets/floating-monster/FloatingEyeIdleFront.png', 'assets/floating-monster/GlaringOverlordIdleFront.png']
+    myTamagotchi = new Tamagotchi(monsterName, images)
+    document.getElementById('monsterNameContainer').innerHTML = myTamagotchi.name
+    document.getElementById('start-screen').style.display = 'none'
+    document.getElementById('test-container').style.display = 'flex'
+    setGameIntervals()
+    animate(160, 4)
 }
 
 const checkIfLose = (myTamagotchi) => {
@@ -112,15 +129,11 @@ const animate = (num1, num2) => {
         animationDiv.style.backgroundPosition = frameOffset + "px " + "0px";
     }, 500);
 }
-
-
-const images = ['../assets/floating-monster/FloatingEyeIdleFront.png', 'assets/floating-monster/GlaringOverlordIdleFront.png']
-const myTamagotchi = new Tamagotchi('Kevin', images)
-
-let hungerInterval = setInterval(increaseHunger, 1000)
-let exahstionInterval = setInterval(increaseExahstion, 5000)
-let boredomInterval = setInterval(increaseBoredom, 5000)
-let ageInterval = setInterval(increaseAge, 1000)
-let statChecker = setInterval(checkIfLose, 100, myTamagotchi)
+let myTamagotchi
+let hungerInterval
+let exahstionInterval
+let boredomInterval
+let ageInterval
+let statChecker
 let animation
-animate(160, 4)
+document.getElementById("start-button").addEventListener("click", startGame);
