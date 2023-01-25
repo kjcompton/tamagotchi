@@ -77,7 +77,8 @@ const increaseAge = () => {
 }
 
 const endGame = () => {
-
+    document.getElementById('test-container').style.display = 'none'
+    document.getElementById('end-container').style.display = 'flex'
 }
 
 const checkIfLose = (myTamagotchi) => {
@@ -113,16 +114,13 @@ const animate = (num1, num2) => {
 }
 
 
-// const images = ['assets/floating-monster/FloatingEyeIdleFront.png', 'assets/floating-monster/FloatingEyeIdleFront2.png', 'assets/floating-monster/FloatingEyeIdleFront3.png', 'assets/floating-monster/FloatingEyeIdleFront4.png'
 const images = ['../assets/floating-monster/FloatingEyeIdleFront.png', 'assets/floating-monster/GlaringOverlordIdleFront.png']
 const myTamagotchi = new Tamagotchi('Kevin', images)
-// document.getElementById('monsterImage').src = myTamagotchi.sprite
 
-let hungerInterval = setInterval(increaseHunger, 5000)
+let hungerInterval = setInterval(increaseHunger, 1000)
 let exahstionInterval = setInterval(increaseExahstion, 5000)
 let boredomInterval = setInterval(increaseBoredom, 5000)
 let ageInterval = setInterval(increaseAge, 1000)
-// let monsterInterval = setInterval(monsterAnimation, 1000)
 let statChecker = setInterval(checkIfLose, 100, myTamagotchi)
 let animation
 animate(160, 4)
