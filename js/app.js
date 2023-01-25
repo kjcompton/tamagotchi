@@ -95,6 +95,7 @@ const startGame = () => {
     document.getElementById('start-screen').style.display = 'none'
     document.getElementById('test-container').style.display = 'flex'
     setGameIntervals()
+    changeDayNightCycle()
     animate(160, 4)
 }
 
@@ -129,6 +130,28 @@ const animate = (num1, num2) => {
         animationDiv.style.backgroundPosition = frameOffset + "px " + "0px";
     }, 500);
 }
+const changeDayNightCycle = () => {
+    const dayNightScreen = document.getElementById('test-container')
+    let brightnessInterval = 0.00
+    let testDayNight = true
+    dayNightCycle = setInterval(function () {
+        console.log(brightnessInterval)
+        dayNightScreen.style.background = `radial-gradient(circle, rgba(0,0,0, ${brightnessInterval}) 0%, rgba(0,0,0,0.804359243697479) 80%)`;
+        if (testDayNight === true) {
+            brightnessInterval += .01
+            if (brightnessInterval >= 0.99) {
+                testDayNight = false
+            }
+        }
+        else {
+            brightnessInterval -= .01
+            if (brightnessInterval <= 0.01) {
+                testDayNight = true
+            }
+        }
+    }, 100);
+}
+
 let myTamagotchi
 let hungerInterval
 let exahstionInterval
@@ -136,4 +159,5 @@ let boredomInterval
 let ageInterval
 let statChecker
 let animation
+let dayNightCycle
 document.getElementById("start-button").addEventListener("click", startGame);
