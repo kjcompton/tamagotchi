@@ -4,24 +4,30 @@ class Tamagotchi {
         this.name = name
         this.age = 0
         this.hunger = 0
-        this.sleep = 0
+        this.exahstion = 0
         this.boredom = 0
     }
     eat() {
         if (this.hunger != 0) {
             this.hunger -= 1
+            clearInterval(hungerInterval)
+            hungerInterval= setInterval(increaseHunger, 5000, myTamagotchi)
         }
         updateStatCounter()
     }
-    sleeps() {
-        if (this.sleep != 0) {
-            this.sleep -= 1
+    sleep() {
+        if (this.exahstion != 0) {
+            this.exahstion -= 1
+            clearInterval(exahstionInterval)
+            exahstionInterval= setInterval(increaseExahstion, 5000, myTamagotchi)
         }
         updateStatCounter()
     }
     play() {
         if (this.boredom != 0) {
             this.boredom -= 1
+            clearInterval(boredomInterval)
+            boredomInterval = setInterval(increaseBoredom, 5000, myTamagotchi)
         }
         updateStatCounter()
     }
@@ -35,16 +41,19 @@ class Tamagotchi {
 
 const updateStatCounter = () => {
     document.getElementById('hungerTracker').innerHTML = myTamagotchi.hunger
-    document.getElementById('sleepTracker').innerHTML = myTamagotchi.sleep
+    document.getElementById('exahstionTracker').innerHTML = myTamagotchi.exahstion
     document.getElementById('boredomTracker').innerHTML = myTamagotchi.boredom
 }
-const increaseStats = () => {
+const increaseHunger = () => {
     myTamagotchi.hunger += 1
-    myTamagotchi.sleep += 1
-    myTamagotchi.boredom += 1
+    updateStatCounter()
 }
-const interval = () => {
-    increaseStats()
+const increaseExahstion = () => {
+    myTamagotchi.exahstion += 1
+    updateStatCounter()
+}
+const increaseBoredom = () => {
+    myTamagotchi.boredom += 1
     updateStatCounter()
 }
 
@@ -55,7 +64,7 @@ interactionButtons.addEventListener('click', function(event) {
         myTamagotchi.eat()
     }
     else if (event.target.name === 'sleep') {
-        myTamagotchi.sleeps()
+        myTamagotchi.sleep()
     }
     else {
         myTamagotchi.play()
@@ -67,6 +76,8 @@ const myTamagotchi = new Tamagotchi('Kevin')
 console.log(myTamagotchi)
 
 
+let hungerInterval = setInterval(increaseHunger, 5000, myTamagotchi)
+let exahstionInterval = setInterval(increaseExahstion, 5000, myTamagotchi)
+let boredomInterval = setInterval(increaseBoredom, 5000, myTamagotchi)
 
-setInterval(increaseStats, 5000, myTamagotchi)
 //function for increasing tamgachi age at an interval
