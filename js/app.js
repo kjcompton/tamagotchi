@@ -1,46 +1,72 @@
 //create a class for tamagotchi
 class Tamagotchi {
-    constructor (name) {
+    constructor(name) {
         this.name = name
         this.age = 0
         this.hunger = 0
         this.sleep = 0
         this.boredom = 0
     }
-    eat () {
-        this.eat -= 1
+    eat() {
+        if (this.hunger != 0) {
+            this.hunger -= 1
+        }
+        updateStatCounter()
     }
-    sleep () {
-        this.sleep -= 1
+    sleeps() {
+        if (this.sleep != 0) {
+            this.sleep -= 1
+        }
+        updateStatCounter()
     }
-    play () {
-        this.boredom -= 1
+    play() {
+        if (this.boredom != 0) {
+            this.boredom -= 1
+        }
+        updateStatCounter()
     }
-    age () {
+    age() {
         this.age += 1
     }
-    morph () {
+    morph() {
         
     }
 }
-const increaseStats = (test) => {
 
-    test.hunger += 1
-    test.sleep += 1
-    test.boredom += 1
-    hungerTracker.innerHTML = test.hunger
-    sleepTracker.innerHTML = test.sleep
-    boredomTracker.innerHTML = test.boredom
+const updateStatCounter = () => {
+    document.getElementById('hungerTracker').innerHTML = myTamagotchi.hunger
+    document.getElementById('sleepTracker').innerHTML = myTamagotchi.sleep
+    document.getElementById('boredomTracker').innerHTML = myTamagotchi.boredom
+}
+const increaseStats = () => {
+    myTamagotchi.hunger += 1
+    myTamagotchi.sleep += 1
+    myTamagotchi.boredom += 1
+}
+const interval = () => {
+    increaseStats()
+    updateStatCounter()
 }
 
+const interactionButtons = document.querySelector('.interaction-buttons')
+interactionButtons.addEventListener('click', function(event) {
+    event.preventDefault()
+    if (event.target.name === 'eat') {
+        myTamagotchi.eat()
+    }
+    else if (event.target.name === 'sleep') {
+        myTamagotchi.sleeps()
+    }
+    else {
+        myTamagotchi.play()
+    }
+})
 
 //instantiate tamagatchi
-const test = new Tamagotchi('Kevin')
-//method function for naming pet
-let hungerTracker = document.getElementById('hungerTracker')
-let sleepTracker = document.getElementById('sleepTracker')
-let boredomTracker = document.getElementById('boredomTracker')
+const myTamagotchi = new Tamagotchi('Kevin')
+console.log(myTamagotchi)
 
 
-setInterval(increaseStats, 5000, test)
+
+setInterval(increaseStats, 5000, myTamagotchi)
 //function for increasing tamgachi age at an interval
