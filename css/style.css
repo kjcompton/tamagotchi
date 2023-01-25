@@ -1,4 +1,49 @@
 body {
+    height: 100vh;
     background: black;
     color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.game-container {
+    width: 60%;
+    height: 80%;
+}
+.stats-container {
+    height: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.monster-container {
+    height: 80%;
+    width: 100%;
+    background-image: url('../assets/Background_space.png');
+    background-repeat: no-repeat; 
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+.interaction-buttons {
+    height: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#monsterImage {
+    width: 50px;
+}
+#animation { 
+    background-image: url('../assets/floating-monster/FloatingEyeIdleFront.png');
+    background-repeat: no-repeat; 
+    height: 160px; 
+    width: 160px; 
 }
