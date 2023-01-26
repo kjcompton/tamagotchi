@@ -12,7 +12,7 @@ class Tamagotchi {
         if (this.hunger != 0) {
             this.hunger -= 1
             clearInterval(hungerInterval)
-            hungerInterval= setInterval(increaseHunger, 5000, myTamagotchi)
+            hungerInterval = setInterval(increaseHunger, 3500, myTamagotchi)
         }
         updateStatCounter()
     }
@@ -20,7 +20,7 @@ class Tamagotchi {
         if (this.exahstion != 0) {
             this.exahstion -= 1
             clearInterval(exahstionInterval)
-            exahstionInterval= setInterval(increaseExahstion, 5000, myTamagotchi)
+            exahstionInterval = setInterval(increaseExahstion, 5000, myTamagotchi)
         }
         updateStatCounter()
     }
@@ -28,7 +28,7 @@ class Tamagotchi {
         if (this.boredom != 0) {
             this.boredom -= 1
             clearInterval(boredomInterval)
-            boredomInterval = setInterval(increaseBoredom, 5000, myTamagotchi)
+            boredomInterval = setInterval(increaseBoredom, 2500, myTamagotchi)
         }
         updateStatCounter()
     }
@@ -36,14 +36,22 @@ class Tamagotchi {
         this.age += 1
     }
     morph() {
-        console.log('Im morphing')
-        document.getElementById("animation").style.height = '320px'
-        document.getElementById("animation").style.width = '320px'
-        document.getElementById("animation").style.backgroundImage = `url('${this.images[1]}')`
-        clearInterval(animation)
-        animate(320, 8)
+        if (this.age === 6) {
+            document.getElementById("animation").style.height = '160px'
+            document.getElementById("animation").style.width = '160px'
+            document.getElementById("animation").style.backgroundImage = `url('${this.images[1]}')`
+            clearInterval(animation)
+            animate(160, 4)
+        }
+        else if (this.age === 12) {
+            document.getElementById("animation").style.height = '320px'
+            document.getElementById("animation").style.width = '320px'
+            document.getElementById("animation").style.backgroundImage = `url('${this.images[2]}')`
+            clearInterval(animation)
+            animate(320, 8)
+        }
+        
     }
-    
 }
 
 const updateStatCounter = () => {
@@ -70,26 +78,21 @@ const increaseBoredom = () => {
 }
 const increaseAge = () => {
     myTamagotchi.ageUp()
-    if (myTamagotchi.age == 10) {
+    if (myTamagotchi.age == 6 || myTamagotchi.age == 12) {
         myTamagotchi.morph()
     }
     updateStatCounter()
 }
 const setGameIntervals = () => {
-    hungerInterval = setInterval(increaseHunger, 5000)
-    exahstionInterval = setInterval(increaseExahstion, 5000)
-    boredomInterval = setInterval(increaseBoredom, 5000)
-    ageInterval = setInterval(increaseAge, 1000)
+    hungerInterval = setInterval(increaseHunger, 4000)
+    exahstionInterval = setInterval(increaseExahstion, 6000)
+    boredomInterval = setInterval(increaseBoredom, 2000)
+    ageInterval = setInterval(increaseAge, 4000)
     statChecker = setInterval(checkIfLose, 100, myTamagotchi)
-}
-
-const endGame = () => {
-    document.getElementById('test-container').style.display = 'none'
-    document.getElementById('end-container').style.display = 'flex'
 }
 const startGame = () => {
     const monsterName = document.getElementById('monsterName').value
-    const images = ['../assets/floating-monster/FloatingEyeIdleFront.png', 'assets/floating-monster/GlaringOverlordIdleFront.png']
+    const images = ['../assets/floating-monster/FloatingEyeIdleFront.png', 'assets/floating-monster/MalignantGazerIdleFront.png', 'assets/floating-monster/GlaringOverlordIdleFront.png']
     myTamagotchi = new Tamagotchi(monsterName, images)
     document.getElementById('monsterNameContainer').innerHTML = myTamagotchi.name
     document.getElementById('start-screen').style.display = 'none'
@@ -99,25 +102,17 @@ const startGame = () => {
     animate(160, 4)
 }
 
+const endGame = () => {
+    document.getElementById('test-container').style.display = 'none'
+    document.getElementById('end-container').style.display = 'flex'
+}
+
+
 const checkIfLose = (myTamagotchi) => {
     if (myTamagotchi.hunger >= '10' || myTamagotchi.exahstion >= '10' || myTamagotchi.boredom >= '10') {
         endGame()
     }
 }
-
-const interactionButtons = document.querySelector('.interaction-buttons')
-interactionButtons.addEventListener('click', function(event) {
-    event.preventDefault()
-    if (event.target.name === 'eat') {
-        myTamagotchi.eat()
-    }
-    else if (event.target.name === 'sleep') {
-        myTamagotchi.sleep()
-    }
-    else {
-        myTamagotchi.play()
-    }
-})
 
 const animate = (num1, num2) => {
     const frameWidth = num1;
@@ -130,16 +125,17 @@ const animate = (num1, num2) => {
         animationDiv.style.backgroundPosition = frameOffset + "px " + "0px";
     }, 500);
 }
+
 const changeDayNightCycle = () => {
     const dayNightScreen = document.getElementById('test-container')
     let brightnessInterval = 0.00
     let testDayNight = true
     dayNightCycle = setInterval(function () {
         console.log(brightnessInterval)
-        dayNightScreen.style.background = `radial-gradient(circle, rgba(0,0,0, ${brightnessInterval}) 0%, rgba(0,0,0,0.804359243697479) 80%)`;
+        dayNightScreen.style.background = `radial-gradient(circle, rgba(0,0,0, ${brightnessInterval}) 0%, rgba(0,0,0,0.904359243697479) 90%)`;
         if (testDayNight === true) {
             brightnessInterval += .01
-            if (brightnessInterval >= 0.99) {
+            if (brightnessInterval >= 0.90) {
                 testDayNight = false
             }
         }
@@ -152,6 +148,20 @@ const changeDayNightCycle = () => {
     }, 100);
 }
 
+const interactionButtons = document.querySelector('.interaction-buttons')
+interactionButtons.addEventListener('click', function (event) {
+    event.preventDefault()
+    if (event.target.name === 'eat') {
+        myTamagotchi.eat()
+    }
+    else if (event.target.name === 'sleep') {
+        myTamagotchi.sleep()
+    }
+    else {
+        myTamagotchi.play()
+    }
+})
+
 let myTamagotchi
 let hungerInterval
 let exahstionInterval
@@ -160,4 +170,5 @@ let ageInterval
 let statChecker
 let animation
 let dayNightCycle
+
 document.getElementById("start-button").addEventListener("click", startGame);

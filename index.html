@@ -1,44 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tamagotchi</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-
-<body>
-    <div id="start-screen">
-        <h1>Name your monster and click start</h1>
-        <input type="text" id="monsterName"/>
-        <button id="start-button">START</button>
-    </div>
-    <div id="test-container">
-        <div class="game-container">
-            <h1 class="name-container" id="monsterNameContainer"></h1>
-            <div class="stats-container">
-                <div>Hunger: <span id="hungerTracker">0</span></div>
-                <div>Sleep: <span id="exahstionTracker">0</span></div>
-                <div>Boredom: <span id="boredomTracker">0</span></div>
-                <div>Age: <span id="ageTracker">0</span></div>
-            </div>
-            <div class="monster-container">
-                <div id="animation"></div>
-            </div>
-            <div class="interaction-buttons">
-                <button class="eat-button" name="eat">EAT</button>
-                <button class="sleep-button" name="sleep">SLEEP</button>
-                <button class="play-button" name="play">PLAY</button>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tamagotchi</title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <div id="start-screen">
+            <h1>Name your monster and click start</h1>
+            <input type="text" id="monsterName" />
+            <button id="start-button">START</button>
+        </div>
+        <div id="test-container">
+            <div class="game-container">
+                <h1 class="name-container" id="monsterNameContainer"></h1>
+                <div class="stats-container">
+                    <div>Hunger: <span id="hungerTracker">0</span></div>
+                    <div>Sleep: <span id="exahstionTracker">0</span></div>
+                    <div>Boredom: <span id="boredomTracker">0</span></div>
+                    <div>Age: <span id="ageTracker">0</span></div>
+                </div>
+                <div class="monster-container">
+                    <div id="animation"></div>
+                </div>
+                <div class="interaction-buttons">
+                    <button class="eat-button" name="eat">EAT</button>
+                    <button class="sleep-button" name="sleep">SLEEP</button>
+                    <button class="play-button" name="play">PLAY</button>
+                </div>
             </div>
         </div>
-    </div>
-    <div id="end-container">
-        <h1>You have let your monster die!</h1>
-        <button id="retry-button" onClick="window.location.reload();">RETRY</button>
-    </div>
-    <script src="js/app.js"></script>
-</body>
-
+        <div id="end-container">
+            <h1>You have let your monster die!</h1>
+            <button id="retry-button" onClick="window.location.reload();">RETRY</button>
+        </div>
+        <script src="js/app.js"></script>
+    </body>
 </html>
